@@ -1,322 +1,508 @@
-# awesome-slack-agents
+# 🤖 awesome-slack-agents
 
-> *Built as part of my work on [first-tree](https://github.com/unispark-inc/first-tree) — shared context infrastructure for agent teams.*
+<p align="center">
+  <img src="https://img.shields.io/badge/agents-22%20curated-blueviolet?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/sources-Twitter%20%7C%20Reddit%20%7C%20GitHub-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/license-CC0-lightgrey?style=for-the-badge" />
+  <img src="https://awesome.re/badge-flat2.svg" />
+</p>
 
-![Awesome](https://awesome.re/badge.svg)
-![License: CC0](https://img.shields.io/badge/License-CC0-lightgrey.svg)
+<p align="center">
+  <b>The best AI agents for Slack — curated from what's actually going viral in the community.</b><br/>
+  Every entry came from a real tweet, Reddit post, or HN thread. Every entry tells you exactly which daily Slack workflow it replaces.
+</p>
 
-**The best AI agents to run in your Slack — curated from what's actually going viral in the community.**
-
-Every entry here came from a real tweet, Reddit post, or GitHub project that people are sharing. Not from vendor blogs. Each entry tells you in plain language: **what workflow it fits**, **what problem it solves**, and **where the community discovered it**.
-
----
-
-## How to use this list
-
-Each entry answers three questions:
-
-- 📌 **When do you need this?** — the Slack workflow it fits
-- 🎯 **What does it do?** — one sentence, plain English
-- 📣 **Where did it go viral?** — the tweet or post that made it spread
+> Built as part of my work on [first-tree](https://github.com/unispark-inc/first-tree) — shared context infrastructure for agent teams.
 
 ---
 
-## Table of Contents
+## 💡 Why this exists
 
-**By what you're trying to do:**
+Most "best Slack bots" lists are vendor SEO. This one is different:
 
-- [Get a daily digest without reading everything](#-daily-digest--summaries)
-- [Handle incidents without leaving Slack](#-incident-response)
-- [Automate standups and team updates](#-standups--async-updates)
-- [Code review and PR triage in Slack](#-code-review--pr-triage)
-- [Answer team questions from your knowledge base](#-knowledge--qa)
-- [Connect Slack to every other tool you use](#-connecting-slack-to-other-tools)
-- [Run a full AI assistant in Slack from your own server](#-self-hosted-ai-assistants-in-slack)
+- **Source-linked** — every entry traces back to a viral tweet, HN post, or Reddit thread
+- **Workflow-first** — organized by what you're *doing* in Slack, not by tool name
+- **Plain English** — written for people who haven't set up a Slack agent before
+
+Pick your situation:
+
+| I want to… | Go to |
+|---|---|
+| Stop reading 200 unread messages every morning | [📋 Summaries & Digests](#-summaries--daily-digests) |
+| Handle incidents without switching apps | [🚨 Incident Response](#-incident-response) |
+| Automate standups so nobody forgets | [🤝 Standups & Async Updates](#-standups--async-updates) |
+| Get PRs reviewed and triaged automatically | [🔍 Code Review & PR Triage](#-code-review--pr-triage) |
+| Answer team questions from docs automatically | [🧠 Knowledge & Q&A](#-knowledge--qa) |
+| Connect Slack to every tool (Jira, GitHub, Gmail…) | [🔌 Connect Slack to Everything](#-connect-slack-to-everything) |
+| Run a full AI assistant from my own server | [🏠 Self-Hosted AI in Slack](#-self-hosted-ai-in-slack) |
+| Have an AI coding agent I can message from Slack | [💻 Coding Agents via Slack](#-coding-agents-via-slack) |
 
 ---
 
-## 📋 Daily Digest & Summaries
+## 📋 Summaries & Daily Digests
 
-> **When:** You wake up and your Slack has 200 unread messages across 10 channels. You need to know what matters in 2 minutes.
+> **The situation:** You open Slack and there are 200 unread messages. You need to know what actually matters in 2 minutes, not 20.
 
 ---
 
-### open-source-slack-ai
+### 🔵 open-source-slack-ai — summarize any thread or channel, free
 
-📌 **Fits when:** You want Slack AI's thread/channel summaries but don't want to pay Slack's premium tier.
+![Stars](https://img.shields.io/github/stars/meetbryce/open-source-slack-ai?style=flat-square&label=⭐) &nbsp; Built at a hackathon in 3 days
 
-🎯 **What it does:** Summarize any Slack thread or channel on demand. You install it yourself, it reads your workspace, and gives you a summary whenever you ask.
+**What it does:** Summarize any Slack thread or channel on demand. Free alternative to Slack AI's paid tier.
 
 ```
-/summarize → summary of the last 24h in any channel
-/tldr → summarize any thread
+Type /summarize in any channel → clean summary of the last 24h
+Highlight any thread → ask for a /tldr
 ```
 
-No subscription. No Slack AI Pro required. Runs on your own server.
+**Onboarding (5 min):**
+```bash
+git clone https://github.com/meetbryce/open-source-slack-ai
+pip install -r requirements.txt
+# Add SLACK_BOT_TOKEN + OPENAI_API_KEY to .env
+python app.py
+```
+Then add the bot to your Slack workspace via the app manifest in the repo.
 
-🔗 **Repo:** https://github.com/meetbryce/open-source-slack-ai  
-📣 **Source:** Surfaced on Reddit r/selfhosted as a free alternative to Slack's paid AI features
-
----
-
-### slack-summarizer (masuidrive)
-
-📌 **Fits when:** You have a busy public channel and need a daily digest automatically posted every morning.
-
-🎯 **What it does:** Runs on a schedule. Reads your public Slack channels. Posts a clean AI-written summary to a channel of your choice. Set it once, it runs every day.
-
-Good for: `#general`, `#engineering`, `#support` — any high-volume channel where people miss things.
-
-🔗 **Repo:** https://github.com/masuidrive/slack-summarizer  
-📣 **Source:** https://github.com/masuidrive/slack-summarizer (1k+ stars, widely shared in the self-hosting community)
+🔗 https://github.com/meetbryce/open-source-slack-ai  
+📣 [How & Why I Built It In 3 Days](https://bryceyork.com/free-open-source-slack-ai/)
 
 ---
 
-### Cursor Automations — Slack digest agent
+### 🔵 slack-summarizer — daily channel digest, auto-posted every morning
 
-📌 **Fits when:** You're an engineer and want a personal async assistant that reads your Slack messages, GitHub PRs, and Jira tickets and gives you a clean to-do list every 2 hours.
+![Stars](https://img.shields.io/github/stars/masuidrive/slack-summarizer?style=flat-square&label=⭐) &nbsp; 104 forks
 
-🎯 **What it does:** A cron agent that runs every 2 hours, reads your Slack mentions + GitHub PRs + Jira issues, deduplicates across sources, and posts a clean dashboard to a private Slack channel.
+**What it does:** Runs on a cron schedule. Reads a busy channel. Posts a clean AI-written summary to any channel you choose. Set it once, it runs every morning.
 
-> *"I dump meeting notes, action items, TODOs, and Loom links into a Slack channel throughout the day. A cron agent runs every 2 hours, reads everything alongside my GitHub PRs, Jira issues, and Slack mentions, deduplicates across sources, and posts a clean dashboard."*
-> — Abhishek Singh, Rippling
+Good for: `#engineering`, `#support`, `#general` — any channel people skim instead of read.
 
-📣 **Source:** [Cursor Automations launch post — March 5, 2026](https://cursor.com/blog/automations)  
-📣 **Source:** [Cursor changelog — real-world usage at Rippling](https://cursor.com/changelog/03-05-26)
+**Onboarding (10 min):**
+```bash
+git clone https://github.com/masuidrive/slack-summarizer
+cp .env.example .env
+# Fill in: SLACK_BOT_TOKEN, SLACK_USER_TOKEN, OPENAI_API_KEY, CHANNEL_ID
+# Add to cron: 0 9 * * 1-5 python summarize.py
+```
+
+🔗 https://github.com/masuidrive/slack-summarizer
+
+---
+
+### 🔵 LlamaBot — Slack bot that learns from your conversations
+
+![Stars](https://img.shields.io/github/stars/run-llama/llamabot?style=flat-square&label=⭐) &nbsp; By the LlamaIndex team
+
+**What it does:** Listens to your Slack workspace, stores conversations in a vector database (Qdrant), and answers questions about what was discussed — with memory across restarts.
+
+Ask it: *"What did the team decide about the API design last week?"* — it will know.
+
+🔗 https://github.com/run-llama/llamabot
 
 ---
 
 ## 🚨 Incident Response
 
-> **When:** Something breaks at 2am. Your on-call engineer gets paged. You want the bot to investigate, post a summary, and propose a fix in Slack — before the human even opens their laptop.
+> **The situation:** Something breaks. Your on-call gets paged. You want the bot to investigate, post findings, and propose a fix in Slack — before the human opens their laptop.
 
 ---
 
-### incidentbot
+### 🔴 incidentbot — full incident lifecycle in Slack
 
-📌 **Fits when:** Your team handles incidents in Slack and you want a structured framework — not a homemade bot you have to maintain.
+![Stars](https://img.shields.io/github/stars/incidentbot/incidentbot?style=flat-square&label=⭐) &nbsp; Updated May 2026 · Used by DevOps teams worldwide
 
-🎯 **What it does:** Full incident lifecycle in Slack. Someone types `/incident start`. The bot creates a dedicated incident channel, assigns roles, tracks timeline, integrates with PagerDuty + Jira + Statuspage + Zoom, and posts updates. When it's resolved, it generates a postmortem draft.
+**What it does:** Someone types `/incident start` in Slack. The bot creates a dedicated incident channel, assigns roles, tracks the timeline, and integrates with PagerDuty + Jira + Statuspage + Zoom. When resolved, it drafts the postmortem automatically.
 
-Works with: PagerDuty · Jira · GitLab · Statuspage · Confluence · Zoom
+```
+/incident start → auto-creates #incident-2026-05-21-api-down
+                → assigns IC, Comms Lead, Tech Lead roles
+                → starts timeline tracking
+                → posts status updates to Statuspage
+/incident resolve → generates postmortem draft
+```
 
-🔗 **Repo:** https://github.com/incidentbot/incidentbot  
-📣 **Source:** Widely referenced in DevOps and SRE communities as the go-to open-source incident bot
+**Onboarding:**
+```bash
+git clone https://github.com/incidentbot/incidentbot
+cp config.example.yaml config.yaml
+# Configure: slack_token, pagerduty_token, jira_url, statuspage_id
+docker-compose up
+```
+
+🔗 https://github.com/incidentbot/incidentbot · https://incidentbot.io  
+📣 Most-cited open-source incident bot in r/devops and SRE communities
 
 ---
 
-### Cursor Automations — incident triage agent
+### 🔴 openai/openai-security-bots — 3 bots from OpenAI's own security team
 
-📌 **Fits when:** A PagerDuty alert fires and you want the agent to investigate the logs, find the recent code change that caused it, and post a proposed fix in Slack *before* the on-call engineer picks up their phone.
+![Stars](https://img.shields.io/github/stars/openai/openai-security-bots?style=flat-square&label=⭐) &nbsp; Released by OpenAI internally, then open-sourced
 
-🎯 **What it does:** Triggered by PagerDuty incident → agent reads Datadog logs + git history → posts findings + proposed fix PR to a Slack channel.
+**What it does:** Three production Slack bots OpenAI actually runs internally:
 
-> *"When triggered by a PagerDuty incident, the automation kicks off an agent that uses the Datadog MCP to investigate logs and looks at the codebase for recent changes. It then sends a message to the on-call engineers in Slack with a PR containing the proposed fix."*
+| Bot | What it does |
+|-----|-------------|
+| **Incident Response Bot** | Chats with users in an incident thread, tracks status, auto-summarizes |
+| **Triage Bot** | Routes inbound security requests to the right sub-team |
+| **SDLC Bot** | Reviews new projects and decides if they need a security review |
 
-📣 **Source:** [Cursor Automations launch — March 2026](https://cursor.com/blog/automations)  
-📣 **Also covered:** [Help Net Security — "Cursor Automations turns code review and ops into background tasks"](https://www.helpnetsecurity.com/2026/03/06/cursor-automations-turns-code-review-and-ops-into-background-tasks/)
+These aren't demos — they're the actual bots running at OpenAI.
+
+🔗 https://github.com/openai/openai-security-bots
 
 ---
 
 ## 🤝 Standups & Async Updates
 
-> **When:** Your team is remote, standups are painful, and half the team forgets to post updates. You want a bot that collects updates on a schedule and formats them so everyone's on the same page.
+> **The situation:** Remote team. Standups are either skipped or take 30 minutes. You want updates to happen automatically.
 
 ---
 
-### slack-standup-bot (colestrode)
+### 🟢 HowsThisGoing — AI standup bot, connects to GitHub + Linear
 
-📌 **Fits when:** You want a dead-simple standup bot that asks your team questions on a schedule and collects their answers in one thread.
+**What it does:** Connects to GitHub, Linear, HubSpot, and Notion. Reads what your team actually *did* (commits, tickets closed) and generates the standup summary for them. Setup in under 30 seconds.
 
-🎯 **What it does:** Pings each team member at a set time, asks what they did, what they're doing today, any blockers. Collects all responses into a clean summary thread in the standup channel. No AI required — just structure.
+> *"AI project manager for Slack that provides instant insights on team progress, blockers, and milestones. GitHub-aware — reads your commits and PRs."*
 
-Simple. Runs on Node. Easy to self-host.
-
-🔗 **Repo:** https://github.com/colestrode/slack-standup-bot  
-📣 **Source:** One of the most-forked Slack bots for async team rituals
+📣 [BetaList launch tweet](https://twitter.com/BetaList/status/1827485288811393526) (August 2024)  
+🔗 https://howsthisgoing.app
 
 ---
 
-### Cursor Automations — standup summarizer
+### 🟢 Cursor Automations — cron digest agent (engineer's personal async assistant)
 
-📌 **Fits when:** You want AI to pull standup data from multiple sources (GitHub, Jira, Slack threads) and write the standup summary for you, so no one has to manually type one.
+**What it does:** A scheduled AI agent that runs every 2 hours, reads your Slack mentions + GitHub PRs + Jira issues, deduplicates across all sources, and posts a clean priority list to a private Slack channel.
 
-🎯 **What it does:** Scheduled agent reads yesterday's GitHub commits + completed Jira tickets + Slack messages → writes and posts a formatted team update to `#standup`.
+Real usage from Rippling:
+> *"I dump meeting notes, action items, TODOs, and Loom links into a Slack channel throughout the day. A cron agent reads everything alongside my GitHub PRs, Jira issues, and Slack mentions, deduplicates across sources, and posts a clean dashboard."*
+> — Abhishek Singh, Rippling
 
-📣 **Source:** [Cursor Automations](https://cursor.com/blog/automations)
+**Workflow triggers available:** Slack message → Linear issue · GitHub PR → review · PagerDuty alert → investigation
+
+📣 [Cursor Automations launch — March 5, 2026](https://cursor.com/blog/automations)
 
 ---
 
 ## 🔍 Code Review & PR Triage
 
-> **When:** PRs pile up. Engineers don't know which ones need urgent attention. You want a bot that reads every new PR, classifies it by risk, and pings the right reviewer in Slack.
+> **The situation:** PRs pile up. Engineers don't know which ones are urgent. You want the bot to read every PR, flag the risky ones, and ping the right reviewer in Slack — automatically.
 
 ---
 
-### Cursor Automations — PR risk classifier
+### 🟡 innogames/slack-bot — start Jenkins jobs, watch PRs, all from Slack
 
-📌 **Fits when:** Your team merges multiple PRs a day and reviewers are overwhelmed. You want risky PRs flagged automatically.
+![Stars](https://img.shields.io/github/stars/innogames/slack-bot?style=flat-square&label=⭐) &nbsp; Updated May 2026 · In production at InnoGames
 
-🎯 **What it does:** On every new PR, an agent reads the diff, classifies risk (blast radius, complexity, infrastructure impact), auto-approves low-risk PRs, and assigns reviewers to high-risk ones. Posts a summary to Slack.
+**What it does:** Start Jenkins builds, watch GitHub/GitLab PRs, watch Jira tickets — all from Slack. When a PR is approved or a build finishes, it pings you in Slack. ChatGPT/DALL-E support added.
 
-> *"On every PR open or push, this automation classifies risk based on blast radius, complexity, and infrastructure impact. Low-risk PRs get auto-approved. Higher-risk PRs get up to two reviewers assigned based on contribution history."*
+```
+@bot watch pull request → notifies you when it merges
+@bot start job backend-deploy → triggers Jenkins job
+@bot tell me about jira ABC-123 → posts ticket summary
+```
 
-📣 **Source:** [Cursor Automations — March 2026](https://cursor.com/blog/automations)
+**Onboarding:**
+```bash
+git clone https://github.com/innogames/slack-bot
+cp config.example.yaml config.yaml
+# Fill in: slack.token, jenkins.host, github.access_token
+go run cmd/bot/main.go
+```
+
+🔗 https://github.com/innogames/slack-bot
 
 ---
 
-### GitHub Issue Prioritization Agent (Postman)
+### 🟡 Kilo for Slack — mention @Kilo in a thread, it ships a PR
 
-📌 **Fits when:** Bug reports land in a Slack channel and you want the agent to check for duplicates, create a Linear/Jira issue, and reply in-thread with a root cause summary.
+**What it does:** Mention `@Kilo` in any Slack thread about a bug or feature. It reads the thread, accesses your GitHub repo, implements the fix, and pushes a pull request — without leaving Slack.
 
-🎯 **What it does:** Triggered by a Slack message → checks for duplicate issues → creates a ticket → investigates root cause in the codebase → replies in the original Slack thread with a summary.
+> *"A developer can type '@Kilo based on this thread, can you implement the fix for the null pointer exception' and the bot pushes a PR."*
 
-📣 **Source:** [Postman Agent Templates — GitHub Issue Prioritization](https://www.postman.com/templates/agents/github-issue-prioritization-agent/)
+Backed by GitLab's cofounder. $8M seed.
+
+📣 [VentureBeat — January 2026](https://venturebeat.com/technology/kilo-launches-ai-powered-slack-bot-that-ships-code-from-a-chat-message)  
+🔗 https://kilo.ai/slack
 
 ---
 
 ## 🧠 Knowledge & Q&A
 
-> **When:** Someone asks in Slack "where's the onboarding doc?" or "what's our pricing?" and a human has to stop what they're doing to answer. You want a bot that knows your company's knowledge base and answers instantly.
+> **The situation:** Someone asks in Slack "where's the API docs?" or "what's our refund policy?" and a human has to stop working to answer. You want a bot that knows everything and answers instantly.
 
 ---
 
-### Vercel Community Agent Template
+### 🟣 Archer (ArcadeAI/SlackAgent) — agentic assistant that acts *as* you
 
-📌 **Fits when:** You run a developer community in Slack and need a bot that answers questions from your docs, routes unanswered questions to humans, and gives admins a panel to review what the bot said.
+![Stars](https://img.shields.io/github/stars/ArcadeAI/SlackAgent?style=flat-square&label=⭐) &nbsp; Self-hosted, runs free on Modal
 
-🎯 **What it does:** AI-powered community Q&A bot with a built-in Next.js admin panel. The bot answers questions from your knowledge base. Anything it can't answer gets flagged in the admin panel for a human to follow up. You see what the bot answered and can correct it.
+**What it does:** An agentic Slack assistant that works as *you* — with access to your own GitHub, email, and calendar via OAuth. Can review and summarize PRs, draft and send emails, find calendar availability and schedule meetings, and crawl websites for research — all inside Slack.
 
-Stack: Next.js · Vercel AI SDK · Slack Bolt
+Every team member gets their own authenticated session. Self-hosted on Modal (free tier available).
 
-🔗 **Repo:** https://github.com/vercel-labs/community-agent-template  
-📣 **Source:** [@aurorascharff on Twitter — "built the Community Agent Template...45 likes, widely shared in the Vercel community](https://twitter.com/aurorascharff)
+**Onboarding:**
+```bash
+git clone https://github.com/ArcadeAI/SlackAgent
+pip install -r requirements.txt
+# Configure: SLACK_BOT_TOKEN, ARCADE_API_KEY, MODAL_TOKEN
+modal deploy archer.py
+# Add bot to workspace → each user connects their own Google/GitHub via OAuth
+```
 
----
-
-### Vercel Knowledge Agent
-
-📌 **Fits when:** You have a growing knowledge base (Notion, files, docs) and want an agent that stays up to date with it and answers Slack questions from it.
-
-🎯 **What it does:** Connects to your file system or knowledge source, indexes it, and answers Slack questions with citations. Auto-updates when files change.
-
-🔗 **Repo:** https://github.com/vercel-labs/knowledge-agent-template
-
----
-
-### Composio Slack Summariser
-
-📌 **Fits when:** A long Slack thread needs summarizing and you want one command to do it, with the summary posted back in the thread.
-
-🎯 **What it does:** One-command Slack thread summarizer built on Composio. Reads the thread, returns a clean summary, posts it back.
-
-🔗 **Repo:** https://github.com/ComposioHQ/slack-summariser
+🔗 https://github.com/ArcadeAI/SlackAgent  
+📣 [Full walkthrough — partee.io (March 2025)](https://partee.io/2025/03/05/slack-agent/)
 
 ---
 
-## 🔌 Connecting Slack to Other Tools
+### 🟣 WandBot — RAG bot that answers questions about your docs
 
-> **When:** You need your Slack agent to actually *do* things — create a Jira ticket, send an email, push a GitHub commit — not just talk. You need the plumbing that connects agents to every other tool.
+![Stars](https://img.shields.io/github/stars/wandb/wandbot?style=flat-square&label=⭐) &nbsp; Production bot — used live in W&B's Slack and Discord
+
+**What it does:** RAG-based support bot. Point it at your documentation, and it answers questions in Slack with citations. Used in production by Weights & Biases to handle developer support across Slack, Discord, ChatGPT, and Zendesk.
+
+Good model for any team that wants a "ask about our docs" bot in Slack.
+
+🔗 https://github.com/wandb/wandbot
 
 ---
 
-### Composio
+### 🟣 Claude Cookbook — Slack data analyst bot
 
-📌 **Fits when:** You're building a Slack agent and don't want to write five different OAuth integrations for Gmail, Jira, GitHub, Linear, Notion.
+**What it does:** Official Anthropic recipe for building a Slack bot that answers data questions. Ask it *"how many signups did we get this week?"* — it queries your database and posts the answer in Slack.
 
-🎯 **What it does:** One library that gives your agent authenticated read/write access to 100+ tools. Your agent gets a list of tools it can call. You stop writing integrations.
+📣 [Claude Platform Cookbook](https://platform.claude.com/cookbook/managed-agents-slack-data-bot)
+
+---
+
+## 🔌 Connect Slack to Everything
+
+> **The situation:** Your Slack agent needs to *do* things — create Jira tickets, push commits, send emails — not just chat. You need the integration layer.
+
+---
+
+### 🔌 Composio — 1,000+ tool integrations for AI agents
+
+![Stars](https://img.shields.io/github/stars/ComposioHQ/composio?style=flat-square&label=⭐&color=green) &nbsp; 4,578 forks
+
+**What it does:** One library. Your agent gets authenticated read/write access to Slack, GitHub, Gmail, Jira, Linear, Notion, Salesforce, and 990+ more. Stop writing OAuth flows for every tool.
 
 ```python
 from composio_langchain import ComposioToolSet
 tools = ComposioToolSet().get_tools(["SLACK", "GITHUB", "GMAIL", "LINEAR"])
-# now your agent can read/write all of those
+# your agent can now read/write all of those — authenticated, no extra setup
 ```
 
-Works with: LangChain · LlamaIndex · raw Claude/OpenAI calls
+> *"Composio is a cool production-ready toolset for AI agents — includes 100+ tools including GitHub, Slack, Salesforce, and more."*
+> — [@llama_index on Twitter](https://x.com/llama_index/status/1820224063174053984)
 
-🔗 **Repo:** https://github.com/ComposioHQ/composio  
-📣 **Source:** Viral tweet — *"stop writing five different SDK integrations for your AI agent — Composio mounts Slack, Gmail, GitHub, Linear in one line"* (widely shared in the agent-building community)
-
----
-
-### n8n — Slack workflow automation
-
-📌 **Fits when:** You want to connect Slack to anything (Reddit monitoring, CRM updates, support tickets, content pipelines) without writing code.
-
-🎯 **What it does:** Visual workflow builder. Drag nodes together: "when a Slack message matches a keyword → create Jira ticket + reply in thread." No code required for most flows. AI nodes available for the reasoning parts.
-
-> An n8n social media workflow went viral on Reddit with 389 upvotes — a four-stage architecture for monitoring Reddit trends and sending AI-summarized reports to Slack.
-
-🔗 **Templates:** https://n8n.io/integrations/slack/  
-🔗 **280+ free templates:** https://github.com/enescingoz/awesome-n8n-templates  
-📣 **Source:** [Reddit viral post — n8n + GPT-4 + Slack trend analysis, 389 upvotes](https://n8n.io/workflows/4373-automate-reddit-trend-analysis-with-gpt-4-and-slackgmail-distribution/)
+🔗 https://github.com/ComposioHQ/composio
 
 ---
 
-## 🏠 Self-Hosted AI Assistants in Slack
+### 🔌 agent-slack (stablyai) — CLI that lets any AI agent use Slack
 
-> **When:** You want a full AI assistant that lives in your Slack, runs on your own server (or laptop), and you control the model, the data, and the cost.
+![Stars](https://img.shields.io/github/stars/stablyai/agent-slack?style=flat-square&label=⭐) &nbsp; 99 upvotes on HN · 35 comments
 
----
+**What it does:** CLI tool for AI agents to interact with Slack. Paste in a Slack URL and it reads the channel or thread. Downloads files and snippets. Reads Canvases as markdown. Zero-config auth if you have Slack Desktop installed.
 
-### OpenClaw
+> *"We don't have access to the Slack MCP and couldn't find anything out there that worked for us."*
 
-📌 **Fits when:** You want one AI agent that follows you across Slack, Discord, WhatsApp, Telegram, and iMessage — all from the same self-hosted instance.
-
-🎯 **What it does:** Run any LLM (Claude, GPT-4, DeepSeek, Gemini) from your own machine and connect it to every messaging app you use. Your agent lives in Slack DMs, answers in Discord channels, and replies to WhatsApp messages — all the same brain, all the same context.
-
-**The viral moment:** In January 2026, it went from 9k to 149k GitHub stars in one week. The reason: it was the first tool that let AI come to you, instead of you going to AI.
-
-🔗 **Repo:** https://github.com/openclaw/openclaw  
-📣 **Source:** [SimilarLabs — "OpenClaw: Why 2026's Hottest AI Agent Project Got 60K Stars in 72 Hours"](https://similarlabs.com/blog/openclaw-ai-agent-trend-2026)  
-📣 **Source:** [KDNuggets — "OpenClaw Explained: The Free AI Agent Tool Going Viral in 2026"](https://www.kdnuggets.com/openclaw-explained-the-free-ai-agent-tool-going-viral-already-in-2026)
+📣 [Show HN — 99 points](https://news.ycombinator.com/item?id=46905745)  
+🔗 https://github.com/stablyai/agent-slack
 
 ---
 
-### nanobot (HKUDS)
+### 🔌 n8n — visual workflow builder, 1,000+ Slack templates
 
-📌 **Fits when:** You want a lightweight, hackable AI agent for Slack that you can actually read the full source code of — only ~4,000 lines.
+**What it does:** No-code visual builder. Connect Slack to anything with drag-and-drop. Nodes for every trigger and action: *"when Slack message matches keyword → create Jira ticket + reply in thread."* AI nodes available for reasoning steps.
 
-🎯 **What it does:** Minimal open-source AI agent. Connects to Slack, Discord, Telegram, WhatsApp, Teams, and 10+ more. Works with 20+ LLM providers. Small enough to understand and modify. Built by the HKU Data Intelligence Lab team.
+Viral workflow: monitoring Reddit for trending topics → GPT-4 summary → posted to Slack (389 upvotes on Reddit).
 
-What makes it different from OpenClaw: smaller, more readable, easier to fork and customize.
+**Onboarding (2 min with Docker):**
+```bash
+docker run -it --rm \
+  -p 5678:5678 \
+  -v ~/.n8n:/home/node/.n8n \
+  n8nio/n8n
+# Open http://localhost:5678 → add Slack credentials → import a template
+```
 
-🔗 **Repo:** https://github.com/HKUDS/nanobot  
-📣 **Source:** [Medium — "NanoBot: Ultra-Lightweight AI Agent Framework" — widely shared in the ML community](https://medium.com/data-science-in-your-pocket/what-is-nanobot-ultra-lightweight-ai-agent-framework-c43ad6c40b11)
+🔗 https://n8n.io/integrations/slack/ · 280+ free templates: https://github.com/enescingoz/awesome-n8n-templates
 
 ---
 
-### Bolt Python AI Chatbot (official Slack sample)
+## 🏠 Self-Hosted AI in Slack
 
-📌 **Fits when:** You want to build a custom Slack AI bot from scratch with a supported, official starting point from Slack.
+> **The situation:** You want a full AI assistant in Slack that you control — your server, your model, your data.
 
-🎯 **What it does:** Official Slack sample repo that wires up both Claude and GPT-4 to a Slack app. Handles app mentions, DMs, and streaming responses. The cleanest starting point if you're building something custom.
+---
 
-🔗 **Repo:** https://github.com/slack-samples/bolt-python-ai-chatbot
+### 🏠 OpenClaw — AI agent for Slack, Discord, WhatsApp + 50 more
+
+![Stars](https://img.shields.io/badge/⭐-373%2C759-yellow?style=flat-square) &nbsp; Fastest-growing GitHub repo in history
+
+**What it does:** Run any LLM (Claude, GPT-4, DeepSeek, Gemini) from your own machine and connect it to every messaging app you use. Your agent lives in Slack DMs, responds in Discord, and replies to WhatsApp — same brain, same context, everywhere.
+
+**The viral moment:** January 2026 — went from 9k to 149k GitHub stars in one week. The reason: first tool that lets AI come *to you* instead of you going to AI.
+
+**Onboarding:**
+```bash
+git clone https://github.com/openclaw/openclaw
+cp .env.example .env
+# Add your LLM API key + Slack bot token
+docker-compose up
+# In Slack: add app → DM it → it replies with your LLM
+```
+
+🔗 https://github.com/openclaw/openclaw  
+📣 [KDNuggets — "OpenClaw: The Free AI Agent Tool Going Viral in 2026"](https://www.kdnuggets.com/openclaw-explained-the-free-ai-agent-tool-going-viral-already-in-2026)  
+📣 [SimilarLabs — "60K Stars in 72 Hours"](https://similarlabs.com/blog/openclaw-ai-agent-trend-2026)
+
+---
+
+### 🏠 nanobot (HKUDS) — tiny, readable, fully hackable
+
+![Stars](https://img.shields.io/badge/⭐-42%2C948-yellow?style=flat-square) &nbsp; By HKU Data Intelligence Lab · Feb 2026
+
+**What it does:** Same idea as OpenClaw — self-hosted AI agent across Slack, Discord, Telegram, WhatsApp, Teams, DingTalk, Feishu — but ~4,000 lines of code vs OpenClaw's 430,000. You can actually read the whole thing.
+
+Good for: teams who want to fork and customize without drowning in code.
+
+🔗 https://github.com/HKUDS/nanobot  
+📣 [Medium — widely shared in ML community](https://medium.com/data-science-in-your-pocket/what-is-nanobot-ultra-lightweight-ai-agent-framework-c43ad6c40b11)
+
+---
+
+### 🏠 doppel-bot (Modal) — train a bot on your own Slack messages
+
+![Stars](https://img.shields.io/github/stars/modal-labs/doppel-bot?style=flat-square&label=⭐) &nbsp; By the Modal team
+
+**What it does:** Trains a language model on *your* Slack message history. Other people in your workspace can ask it questions and it replies as you — your vocabulary, your opinions, your style.
+
+Good for: async teams, persistent knowledge, "ask what X would say about Y."
+
+🔗 https://github.com/modal-labs/doppel-bot
+
+---
+
+## 💻 Coding Agents via Slack
+
+> **The situation:** You want to send a task to a coding agent from Slack ("fix the login bug") and get back a PR — without touching the terminal.
+
+---
+
+### 💻 sleepless-agent — 24/7 Claude Code queue, via Slack
+
+![Stars](https://img.shields.io/github/stars/context-machine-lab/sleepless-agent?style=flat-square&label=⭐) &nbsp; Oct 2025
+
+**What it does:** A daemon that keeps Claude Code Pro running 24/7 via Slack. You drop tasks into Slack — it picks them up, creates isolated workspaces, writes code, commits, opens PRs. Handles day/night usage thresholds to maximize your subscription.
+
+```
+Send to Slack: "refactor auth.ts to use JWT instead of sessions"
+→ agent picks it up, writes the code, opens a PR, replies with the link
+```
+
+🔗 https://github.com/context-machine-lab/sleepless-agent
+
+---
+
+### 💻 claude-code-slack-bot (mpociot) — send Claude Code tasks from Slack DMs
+
+![Stars](https://img.shields.io/github/stars/mpociot/claude-code-slack-bot?style=flat-square&label=⭐) &nbsp; Jun 2025 · 71 forks
+
+**What it does:** Bridges Slack to your local Claude Code. DM the bot or @mention it in a channel with a coding task. Claude Code executes it locally on your machine and posts the result back in Slack.
+
+```bash
+git clone https://github.com/mpociot/claude-code-slack-bot
+npm install
+# Set SLACK_BOT_TOKEN + CLAUDE_API_KEY in .env
+node index.js
+# In Slack: DM the bot with "add error handling to api/routes/users.js"
+```
+
+🔗 https://github.com/mpociot/claude-code-slack-bot  
+📣 [Building an agentic Slackbot with Claude Code — Medium](https://medium.com/@dotdc/building-an-agentic-slackbot-with-claude-code-eba0e472d8f4)
+
+---
+
+### 💻 cc-connect (chenhg5) — chat with Claude Code / Cursor from your phone via Slack
+
+![Stars](https://img.shields.io/badge/⭐-10%2C059-yellow?style=flat-square) &nbsp; Feb 2026 · 920 forks
+
+**What it does:** Bridges local AI coding agents (Claude Code, Cursor, Gemini CLI, Codex) to Slack, Telegram, Discord, WeChat Work, DingTalk, and more. No public IP required. You run it on your dev machine, then message your coding agent from your phone via Slack.
+
+Full web admin UI included to monitor agent sessions.
+
+🔗 https://github.com/chenhg5/cc-connect
+
+---
+
+### 💻 Sniptail — "implement this" from Slack, agent opens a PR
+
+**What it does:** An omnichannel bot that turns Slack "implement this" requests into real code changes. Gathers context from multiple repos, runs a coding agent, opens a PR, posts the result back in Slack.
+
+> *"Turn Slack into a team interface for AI coding agents."*
+
+📣 [Show HN — Feb 2026](https://news.ycombinator.com/item?id=47066016)  
+🔗 https://github.com/Justkog/sniptail
+
+---
+
+## 📚 Tutorials & Onboarding Guides
+
+If you want to build your own from scratch:
+
+| Guide | What you'll build | Stack |
+|---|---|---|
+| [Claude Cookbook — Slack data analyst](https://platform.claude.com/cookbook/managed-agents-slack-data-bot) | Bot that answers data questions in Slack | Claude · Python |
+| [Vercel guide — AI agent for Slack](https://vercel.com/kb/guide/how-to-build-an-ai-agent-for-slack-with-chat-sdk-and-ai-sdk) | Streaming agent with tool use | AI SDK · Next.js |
+| [Cloudflare guide — multi-tenant Slack agent](https://developers.cloudflare.com/agents/guides/slack-agent/) | Agent on Cloudflare Workers | Workers · Durable Objects |
+| [partee.io — Archer walkthrough](https://partee.io/2025/03/05/slack-agent/) | Agentic assistant with OAuth per user | LangGraph · Arcade · Modal |
+| [Medium — DevOps bot from scratch](https://kymidd.medium.com/lets-do-devops-building-a-slack-bot-with-ai-capabilities-from-scratch-ca4c8f9ca78b) | DevOps Slack bot with Claude Sonnet | Python · Bolt |
+| [Medium — Claude Code Slackbot](https://medium.com/@dotdc/building-an-agentic-slackbot-with-claude-code-eba0e472d8f4) | Coding agent reachable from Slack | Claude Code · Python |
+
+---
+
+## 🧪 Reliability Notes
+
+Things that break or need watching before you commit to any of these:
+
+| Issue | Which tools | What to know |
+|---|---|---|
+| Slack token expiry | All | Bot tokens expire if app is inactive >90 days on free workspaces. Use socket mode or set up token refresh. |
+| Rate limits | open-source-slack-ai, summarizers | Slack API: 1 message/sec per channel. OpenAI API: watch costs on GPT-4 for large channels. |
+| Context window on long channels | All summarizers | Channels with 1k+ messages will truncate. Most tools default to last 100 messages — adjust the window in config. |
+| Docker required | OpenClaw, nanobot, incidentbot | All three need Docker. If you're on a shared server without Docker, use the Python installs directly. |
+| Slack's Bolt version mismatch | Bolt-based projects | `bolt-python` breaks on major versions. Pin `slack-bolt==1.x.x` in requirements.txt. |
+| Cursor Automations (cloud) | Cursor | Requires Cursor Pro/Business. Not self-hostable. |
 
 ---
 
 ## Contributing
 
-Add something you found going viral — a tweet, a Reddit post, a GitHub project getting shared around.
+Found something going viral — a tweet, a Reddit thread, a GitHub project getting shared — that belongs here?
 
-Rules:
-1. **Must have a real source** — link to the tweet/post/thread that made it spread. No source = no merge.
-2. **Must fit a real Slack workflow** — explain which kind of team would use it and when.
-3. **Plain language** — write it so someone who has never set up a Slack bot can understand what it does.
+**Rules:**
+1. Must have a **real source** (tweet/post/HN/PH link with engagement). No source = no merge.
+2. Must fit a **real Slack workflow** (not a generic chatbot, not a "coming soon" tool).
+3. Must include **onboarding steps** — at minimum a `git clone` and the 3 env vars needed.
+4. **Plain language** — write it so someone who has never set up a Slack bot understands it.
 
-Format:
 ```markdown
 ### Name
 
-📌 **Fits when:** [the workflow / situation]
+**What it does:** one sentence
 
-🎯 **What it does:** [one sentence, plain English]
+**The situation it fits:** describe the daily Slack problem this solves
 
-[2-3 lines of context — what makes it worth using]
+**Onboarding:**
+```bash
+# the actual commands
+```
 
-🔗 **Repo:** https://github.com/...
-📣 **Source:** [description](https://link-to-tweet-or-post)
+🔗 Repo link  
+📣 Source: [description](viral-link)
 ```
 
 ---
