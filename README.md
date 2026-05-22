@@ -8,6 +8,21 @@ All entries are Slack-native MCP servers or CLIs. All under 5,000 stars. Every e
 
 ---
 
+| | Repo | Replaces |
+|---|---|---|
+| 1 | [korotovsky/slack-mcp-server](#1-korotskyslack-mcp-server--full-readwrite-no-bot-registration) | Registering a Slack App just to read/write channels |
+| 2 | [stablyai/agent-slack](#2-stablyaiagent-slack--read-any-thread-by-url-zero-config) | Manually copying Slack threads into your agent |
+| 3 | [rusq/slackdump](#3-rusqslackdump--archive-your-workspace-without-admin-rights) | Asking an admin to export your workspace |
+| 4 | [slackapi/slack-mcp-plugin](#4-slackapislack-mcp-plugin--official-slack-mcp) | Third-party MCPs when you want the official one |
+| 5 | [piekstra/slack-mcp-server](#5-piekstraslack-mcp-server--block-kit-messages) | Plain-text agent messages that look like bot output |
+| 6 | [jtalk22/slack-mcp-server](#6-jtalk22slack-mcp-server--21-tools--workflow-profiles) | Writing oncall/triage/sprint workflows from scratch |
+| 7 | [dvcrn/slack-thread-summarizer](#7-dvcrntslack-thread-summarizer--mention--summary) | Reading 80-message threads to find the decision |
+| 8 | [arifszn/reminder-mcp](#8-arifsznreminder-mcp--cron-reminders-that-survive-restarts) | Slack reminders that vanish after a server restart |
+| 9 | [ubie-oss/slack-mcp-server](#9-ubie-ossslack-mcp-server--production-grade-typescript-base) | Forking an unmaintained weekend-project MCP |
+| 10 | [redhat-community-ai-tools/slack-mcp](#10-redhat-community-ai-toolsslack-mcp--read-only-mode) | Giving write access to an agent that only needs to read |
+
+---
+
 ## 1. `korotovsky/slack-mcp-server` — full read/write, no bot registration
 
 ![Stars](https://img.shields.io/github/stars/korotovsky/slack-mcp-server?style=flat-square)
