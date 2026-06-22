@@ -6,7 +6,7 @@ All entries are Slack-native MCP servers or CLIs. All under 5,000 stars. Every e
 
 > Curated by the [first-tree](https://github.com/unispark-inc/first-tree?ref=awesome-slack-agents) team.
 
-> use this [link](https://cloud.first-tree.ai/login?utm_source=github&utm_medium=readme&utm_campaign=awesome-slack-agents-app) to use [first-tree 🌳](https://first-tree.ai/?utm_source=github&utm_medium=readme&utm_campaign=awesome-slack-agents-site) for **free!!!** — the most efficient way to **loopmaxx your engineering work** :D
+> use [first-tree 🌳](https://first-tree.ai/?utm_source=github&utm_medium=readme&utm_campaign=awesome-slack-agents-site) for **free!!!** — the most efficient way to **loopmaxx your engineering work** :D
 
 ---
 
