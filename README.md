@@ -1,259 +1,127 @@
-# awesome-slack-skills
+# awesome-agent-skills
 
-Skills for the AI agent already running in your Slack. Not another agent to install — capabilities you give the one you have.
+> A curated, **honestly-filtered** list of agent **skills that produce a finished deliverable** — a report, brief, deck, audit, or spreadsheet — not raw connectors that just hand back API data.
 
-All entries are Slack-native MCP servers or CLIs. All under 5,000 stars. Every entry came from a real community post.
+A *skill* here is the [`SKILL.md`](https://www.anthropic.com/news/skills) wrapper layer: you drop it into an agent, and the agent comes back with a **finished thing a human can use**. A GA4 skill returns a growth *report*, not a JSON blob. An SEO skill returns an *audit*, not a list of backlinks.
 
-> Curated by the [first-tree](https://github.com/unispark-inc/first-tree?ref=awesome-slack-agents) team.
+These are **not Slack-bound.** Install them into a Slack bot, a mobile assistant, Claude Code, or any agent that reads `SKILL.md`. The use case is the deliverable, not the surface.
 
-> use [first-tree 🌳](https://first-tree.ai/?utm_source=github&utm_medium=readme&utm_campaign=awesome-slack-agents-site) for **free!!!** — the most efficient way to **loopmaxx your engineering work** :D
+**What this list is not:** raw [MCP servers](https://modelcontextprotocol.io/) (those give an agent *access*, not an *outcome*), template libraries you fill in yourself, or process scaffolds. Every entry below was checked to confirm it ships a real, finished output and that its source actually exists.
 
 ---
 
-| | Repo | Replaces |
+## The honest headline
+
+This category is **thin**. We mined the major skill collections (Anthropic official, the big community lists) and verified every candidate's source by hand. After deduping and dropping anything that's really a *template* or a *raw connector*, only a couple dozen skills clear the bar. We'd rather show you ~20 real ones than 200 padded ones.
+
+Where a use case has **no good existing skill**, we say so plainly (see [Honest gaps](#honest-gaps)) instead of inventing one.
+
+Legend: ⭐ = stars of the **host** repo (a skill often lives inside a large repo, so stars reflect the repo, not the skill). 🏛️ = Anthropic official. ⚠️ = caveat worth reading before you rely on it.
+
+---
+
+## Growth, analytics & experimentation
+
+| Skill | Produces | Source |
 |---|---|---|
-| 1 | [korotovsky/slack-mcp-server](#1-korotskyslack-mcp-server--full-readwrite-no-bot-registration) | Registering a Slack App just to read/write channels |
-| 2 | [stablyai/agent-slack](#2-stablyaiagent-slack--read-any-thread-by-url-zero-config) | Manually copying Slack threads into your agent |
-| 3 | [rusq/slackdump](#3-rusqslackdump--archive-your-workspace-without-admin-rights) | Asking an admin to export your workspace |
-| 4 | [slackapi/slack-mcp-plugin](#4-slackapislack-mcp-plugin--official-slack-mcp) | Third-party MCPs when you want the official one |
-| 5 | [piekstra/slack-mcp-server](#5-piekstraslack-mcp-server--block-kit-messages) | Plain-text agent messages that look like bot output |
-| 6 | [jtalk22/slack-mcp-server](#6-jtalk22slack-mcp-server--21-tools--workflow-profiles) | Writing oncall/triage/sprint workflows from scratch |
-| 7 | [dvcrn/slack-thread-summarizer](#7-dvcrntslack-thread-summarizer--mention--summary) | Reading 80-message threads to find the decision |
-| 8 | [arifszn/reminder-mcp](#8-arifsznreminder-mcp--cron-reminders-that-survive-restarts) | Slack reminders that vanish after a server restart |
-| 9 | [ubie-oss/slack-mcp-server](#9-ubie-ossslack-mcp-server--production-grade-typescript-base) | Forking an unmaintained weekend-project MCP |
-| 10 | [redhat-community-ai-tools/slack-mcp](#10-redhat-community-ai-toolsslack-mcp--read-only-mode) | Giving write access to an agent that only needs to read |
+| **analytics-strategy** | A tracking-plan doc: North Star metric, KPI hierarchy, event catalog, naming conventions, measurement governance | [rampstackco/claude-skills](https://github.com/rampstackco/claude-skills/tree/main/skills/analytics-strategy) · 373⭐ |
+| **cro-optimization** | A CRO test-plan doc + ICE-scored hypothesis list with decision criteria and segment-level results analysis | [rampstackco/claude-skills](https://github.com/rampstackco/claude-skills/tree/main/skills/cro-optimization) · 373⭐ |
+| **experiment-design** | An experiment design (A/B, multivariate, holdout): hypothesis, sample size, guardrail metrics, analysis plan | [rampstackco/claude-skills](https://github.com/rampstackco/claude-skills/tree/main/skills/experiment-design) · 373⭐ |
+| **performance-report** | An executive marketing-performance report: KPI dashboard by channel, trend analysis, wins/misses, impact×effort recommendations | [anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins/tree/main/marketing/skills/performance-report) · 🏛️ 21.9k⭐ |
+
+## Marketing & content
+
+| Skill | Produces | Source |
+|---|---|---|
+| **competitive-brief** | A competitive brief: feature-comparison matrix, positioning analysis, messaging review, strategic recommendations | [anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins/tree/main/marketing/skills/competitive-brief) · 🏛️ 21.9k⭐ |
+| **campaign-plan** | A campaign brief: objectives, audience, messaging, channel strategy, content calendar, budget, risks | [anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins/tree/main/marketing/skills/campaign-plan) · 🏛️ 21.9k⭐ |
+| **email-sequence** | A ready-to-send multi-touch email sequence with per-step intent and copy | [anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins/tree/main/marketing/skills/email-sequence) · 🏛️ 21.9k⭐ |
+| **brand-review** | A brand-consistency review across copy and assets, with specific fixes | [anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins/tree/main/marketing/skills/brand-review) · 🏛️ 21.9k⭐ |
+
+## SEO
+
+| Skill | Produces | Source |
+|---|---|---|
+| **seo-audit-orchestration** | A full SEO audit suite (technical, on-page, content-gap, keyword-gap, backlink) as a consolidated report | [rampstackco/claude-skills](https://github.com/rampstackco/claude-skills/tree/main/skills/seo-audit-orchestration) · 373⭐ ⚠️ needs Ahrefs MCP |
+| **seo-audit** (marketing) | A standalone SEO audit report: technical issues, on-page gaps, content/keyword opportunities | [anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins/tree/main/marketing/skills/seo-audit) · 🏛️ 21.9k⭐ |
+
+## Product & research
+
+| Skill | Produces | Source |
+|---|---|---|
+| **pm-spec-writing** | A specific, actionable dev brief / spec written from a vague idea or feature request | [rampstackco/claude-skills](https://github.com/rampstackco/claude-skills/tree/main/skills/pm-spec-writing) · 373⭐ |
+| **roadmap-planning** | A multi-quarter roadmap sequenced from a backlog, with dependencies and themes | [rampstackco/claude-skills](https://github.com/rampstackco/claude-skills/tree/main/skills/roadmap-planning) · 373⭐ |
+| **user-feedback-aggregation** | A synthesized feedback brief: themes, severity, representative quotes, prioritized actions, across support/NPS/sales/social | [rampstackco/claude-skills](https://github.com/rampstackco/claude-skills/tree/main/skills/user-feedback-aggregation) · 373⭐ |
+| **deep-research** | A cited research report from autonomous multi-step investigation (market/competitive/literature) | [sanjay3290/ai-skills](https://github.com/sanjay3290/ai-skills/tree/main/skills/deep-research) · 327⭐ ⚠️ wraps Gemini Deep Research paid API; needs your own key |
+| **academic-research-skills** | A full research-to-publication pipeline: formatted paper (PDF/DOCX), literature review, peer-review report, citation validation | [Imbad0202/academic-research-skills](https://github.com/Imbad0202/academic-research-skills) · 34.4k⭐ |
+
+## Engineering — code, PR & security
+
+| Skill | Produces | Source |
+|---|---|---|
+| **code-review** | A confidence-scored PR review report + high-confidence line-by-line comments posted to the PR | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/code-review) · 🏛️ 134k⭐ |
+| **pr-review-toolkit** | A multi-agent PR review report across 6 lenses: comment accuracy, test coverage, error handling, type design, quality, simplification | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/pr-review-toolkit) · 🏛️ 134k⭐ |
+| **security-guidance** | A security audit report: pattern warnings, diff review for high-severity findings, multi-file data-flow analysis (IDOR, auth bypass, SSRF, injection, XSS) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/security-guidance) · 🏛️ 134k⭐ |
+| **after-action-report** | A structured postmortem / retrospective: timeline, root-cause analysis, contributing factors, action items | [rampstackco/claude-skills](https://github.com/rampstackco/claude-skills/tree/main/skills/after-action-report) · 373⭐ |
+
+## Documents & decks (the reliable core)
+
+These are the Anthropic-official office-doc engines — the most dependable outcome-producers in the ecosystem. Any of the report-style skills above can hand off to these to render a final file.
+
+| Skill | Produces | Source |
+|---|---|---|
+| **pptx** | A finished, editable PowerPoint deck: layouts, charts, speaker notes | [anthropics/skills](https://github.com/anthropics/skills/tree/main/skills/pptx) · 🏛️ 155k⭐ |
+| **docx** | A polished Word document: TOC, tables, headers/footers, tracked changes, comments | [anthropics/skills](https://github.com/anthropics/skills/tree/main/skills/docx) · 🏛️ 155k⭐ |
+| **xlsx** | A spreadsheet / financial model with formulas, formatting, and zero formula errors | [anthropics/skills](https://github.com/anthropics/skills/tree/main/skills/xlsx) · 🏛️ 155k⭐ |
+| **pdf** | PDF documents: create, merge, split, fill forms, OCR | [anthropics/skills](https://github.com/anthropics/skills/tree/main/skills/pdf) · 🏛️ 155k⭐ |
+| **canvas-design** | Finished poster/visual designs as PNG and PDF | [anthropics/skills](https://github.com/anthropics/skills/tree/main/skills/canvas-design) · 🏛️ 155k⭐ |
 
 ---
 
-## 1. `korotovsky/slack-mcp-server` — full read/write, no bot registration
+## Honest gaps
 
-![Stars](https://img.shields.io/github/stars/korotovsky/slack-mcp-server?style=flat-square)
+Use cases people clearly want, where we could **not** find a real, mainstream, outcome-producing skill (as of this writing). If you know one that genuinely ships a finished deliverable, [open a PR](#contributing).
 
-Read messages, post replies, upload files, manage reactions — using your existing Slack session token instead of registering a bot app. No admin approval. No app manifest. ~30,000 engineers/month use it this way.
-
-Every other Slack MCP requires creating a Slack App and waiting for admin approval. This one uses `xoxc` + `xoxd` browser tokens, the same ones your desktop client uses.
-
-```json
-{
-  "mcpServers": {
-    "slack": {
-      "command": "npx",
-      "args": ["@korotovsky/slack-mcp-server"],
-      "env": {
-        "SLACK_MCP_XOXC_TOKEN": "xoxc-...",
-        "SLACK_MCP_XOXD_TOKEN": "xoxd=..."
-      }
-    }
-  }
-}
-```
-
-Get your tokens: Slack desktop → Help → Troubleshooting → Copy support link → extract from cookies in DevTools.
-
-Tokens expire on logout. Re-extract after each logout.
-
-🔗 https://github.com/korotovsky/slack-mcp-server  
-*[Show HN](https://news.ycombinator.com/item?id=47166047)*
+- **Pitch / investor deck (the *narrative*, not just the file).** `pptx` renders the slides; nothing mainstream writes the story + financial summary for you.
+- **Meeting → action-item brief.** Plenty of transcript *tools*; no clean skill that returns an owner/due/decision brief.
+- **Researched, personalized sales outreach.** `email-sequence` writes the copy; none does the per-prospect research that makes outreach land.
+- **Live KPI dashboard report (data → narrative report).** `analytics-strategy` plans the tracking; nothing portable turns *live* GA4/Amplitude data into a written growth report. (Custom builds exist but are hard-wired to one property.)
 
 ---
 
-## 2. `stablyai/agent-slack` — read any thread by URL, zero config
+## What didn't make the cut (and why)
 
-![Stars](https://img.shields.io/github/stars/stablyai/agent-slack?style=flat-square)
+Being explicit keeps the list trustworthy:
 
-Paste a Slack URL, get the thread. Downloads files and snippets. Reads Canvases as markdown. Auth is automatic if Slack Desktop is installed — no token setup.
-
-Ships with a `SKILL.md` that works with Claude Code, Cursor, and Windsurf out of the box.
-
-```bash
-pip install agent-slack
-agent-slack read https://yourworkspace.slack.com/archives/C1234/p1234567890
-```
-
-🔗 https://github.com/stablyai/agent-slack  
-*[Show HN — 99 upvotes](https://news.ycombinator.com/item?id=46905745)*
+- **Template / framework libraries** (e.g. large "PM skills" packs). They ship blank frameworks you fill in — not a finished deliverable the agent produces. Great starting points, wrong category for this list.
+- **Raw MCP servers / connectors.** They give an agent *access* to GA4, Slack, GitHub, Ahrefs, etc. — necessary plumbing, but the *outcome* is yours to build. A skill is what turns that access into a report.
+- **Process scaffolds and "guidance" skills** (design philosophy, how-to-build-an-MCP). Useful, but they don't return a deliverable.
+- **Personal / hard-wired skills.** Skills hard-coded to one team's analytics property or repo set. Real and working, but not reusable by others.
 
 ---
 
-## 3. `rusq/slackdump` — archive your workspace without admin rights
+## How to use a skill in any agent
 
-![Stars](https://img.shields.io/github/stars/rusq/slackdump?style=flat-square)
+A skill is a folder with a `SKILL.md` (a short spec the agent reads) plus any supporting scripts. To use one:
 
-Export any channel, DM, or file into JSON/HTML/text without workspace admin privileges. Built-in MCP mode so your agent can query the archive directly.
+1. **Claude Code / Claude app** — drop the skill folder into your skills directory, or install the plugin it ships in. The agent auto-loads it when a request matches.
+2. **A Slack bot or mobile assistant** — if your agent runtime supports skills, point it at the skill folder; it loads the same `SKILL.md`.
+3. **Skills that wrap an MCP** (e.g. the SEO suite wraps Ahrefs) need that MCP connected first — the ⚠️ notes call this out.
 
-Slack's official export requires admin. This doesn't. Works on free workspaces.
-
-```bash
-brew install rusq/brews/slackdump
-slackdump -auth-flow browser      # authenticate via browser
-slackdump -o ./export C1234567890 # export a channel
-slackdump mcp                     # start MCP server over the archive
-```
-
-🔗 https://github.com/rusq/slackdump
-
----
-
-## 4. `slackapi/slack-mcp-plugin` — official Slack MCP
-
-![Stars](https://img.shields.io/github/stars/slackapi/slack-mcp-plugin?style=flat-square)
-
-Search messages, list channels, post messages, manage threads. Built by the Slack team. 56 stars — almost nobody knows it exists yet.
-
-```json
-{
-  "mcpServers": {
-    "slack": {
-      "command": "npx",
-      "args": ["-y", "@slack/mcp-plugin"],
-      "env": {
-        "SLACK_BOT_TOKEN": "xoxb-...",
-        "SLACK_TEAM_ID": "T..."
-      }
-    }
-  }
-}
-```
-
-🔗 https://github.com/slackapi/slack-mcp-plugin
-
----
-
-## 5. `piekstra/slack-mcp-server` — Block Kit messages
-
-![Stars](https://img.shields.io/github/stars/piekstra/slack-mcp-server?style=flat-square)
-
-The only Slack MCP with full Block Kit support. Every other MCP sends plain text. This one lets your agent compose rich messages with buttons, sections, images, and action menus.
-
-```bash
-git clone https://github.com/piekstra/slack-mcp-server
-pip install -r requirements.txt
-```
-
-```json
-{
-  "mcpServers": {
-    "slack": {
-      "command": "python",
-      "args": ["-m", "slack_mcp_server"],
-      "env": { "SLACK_BOT_TOKEN": "xoxb-...", "SLACK_SIGNING_SECRET": "..." }
-    }
-  }
-}
-```
-
-🔗 https://github.com/piekstra/slack-mcp-server
-
----
-
-## 6. `jtalk22/slack-mcp-server` — 21 tools + workflow profiles
-
-![Stars](https://img.shields.io/github/stars/jtalk22/slack-mcp-server?style=flat-square)
-
-21 tools covering channels, users, threads, reactions, files, and user groups. The only MCP with built-in workflow profiles: `oncall-handoff`, `support-triage`, `sprint-tracker`.
-
-```bash
-git clone https://github.com/jtalk22/slack-mcp-server
-npm install
-# SLACK_BOT_TOKEN + SLACK_SIGNING_SECRET in .env
-npm start
-```
-
-🔗 https://github.com/jtalk22/slack-mcp-server
-
----
-
-## 7. `dvcrn/slack-thread-summarizer` — @mention → summary
-
-![Stars](https://img.shields.io/github/stars/dvcrn/slack-thread-summarizer?style=flat-square)
-
-@mention it in any thread. It reads the whole thread and posts a summary as a reply. No slash command. No config beyond a bot token and an OpenAI key.
-
-```bash
-git clone https://github.com/dvcrn/slack-thread-summarizer
-pip install -r requirements.txt
-# SLACK_BOT_TOKEN + SLACK_APP_TOKEN + OPENAI_API_KEY in .env
-python app.py
-```
-
-🔗 https://github.com/dvcrn/slack-thread-summarizer
-
----
-
-## 8. `arifszn/reminder-mcp` — cron reminders that survive restarts
-
-![Stars](https://img.shields.io/github/stars/arifszn/reminder-mcp?style=flat-square)
-
-Persistent cron-based Slack reminders stored in SQLite. Set a 9am Monday reminder in January, it still fires in June. Most reminder bots lose their schedule on restart.
-
-```bash
-git clone https://github.com/arifszn/reminder-mcp
-npm install
-# SLACK_BOT_TOKEN + SLACK_CHANNEL_ID in .env
-```
-
-Your agent calls `set_reminder(cron, message, channel)`.
-
-🔗 https://github.com/arifszn/reminder-mcp
-
----
-
-## 9. `ubie-oss/slack-mcp-server` — production-grade TypeScript base
-
-![Stars](https://img.shields.io/github/stars/ubie-oss/slack-mcp-server?style=flat-square)
-
-Zod-validated inputs, full test suite, clean architecture. Built by a Japanese health-tech company running it in production. The right base if you're building a custom Slack skill and don't want to inherit a weekend project.
-
-```bash
-git clone https://github.com/ubie-oss/slack-mcp-server
-npm install && npm run build && npm test
-```
-
-🔗 https://github.com/ubie-oss/slack-mcp-server
-
----
-
-## 10. `redhat-community-ai-tools/slack-mcp` — read-only mode
-
-![Stars](https://img.shields.io/github/stars/redhat-community-ai-tools/slack-mcp?style=flat-square)
-
-Read channels, threads, and users. Cannot post or delete anything. Use this when your agent only needs to read Slack — for RAG pipelines, auditing, or any context where write access is a liability.
-
-```json
-{
-  "mcpServers": {
-    "slack-readonly": {
-      "command": "uvx",
-      "args": ["redhat-slack-mcp"],
-      "env": { "SLACK_BOT_TOKEN": "xoxb-...", "SLACK_TEAM_ID": "T..." }
-    }
-  }
-}
-```
-
-🔗 https://github.com/redhat-community-ai-tools/slack-mcp
+New to the format? See Anthropic's [Agent Skills announcement](https://www.anthropic.com/news/skills) and the [anthropics/skills](https://github.com/anthropics/skills) repo for canonical examples.
 
 ---
 
 ## Contributing
 
-Must be Slack-native (not a generic agent with Slack support). Must have a community source — HN post, Reddit thread, or GitHub signal. Must be under 5,000 stars. One entry per PR.
+PRs welcome — but the bar is strict, because the value of this list is its filter:
 
-```markdown
-## N. `owner/repo` — tagline
+✅ **Include** if the skill: (1) is a real `SKILL.md`-style skill (link to it), (2) **produces a finished deliverable** — report, brief, deck, audit, spreadsheet — not raw data, (3) is reusable by anyone (not hard-wired to one account), (4) actually exists (we verify the source).
 
-![Stars](https://img.shields.io/github/stars/owner/repo?style=flat-square)
+❌ **Don't** submit raw MCP servers, blank template packs, or "guidance" skills.
 
-One sentence on what capability it adds. One sentence on what makes it different.
-
-```bash
-# install + config
-```
-
-🔗 https://github.com/owner/repo  
-*[source](link)*
-```
+For each entry give: **name · what finished thing it produces · link to the skill · host-repo stars · any caveat (paid API, required MCP, etc.).**
 
 ---
 
-*Maintained as part of [first-tree](https://github.com/unispark-inc/first-tree?ref=awesome-slack-agents) — shared context infrastructure for agent teams.*
+*Curated by [first-tree](https://github.com/serenakeyitan/first-tree). Every entry's source was verified by hand. Found a dead link or a skill that's really a template? Open an issue — keeping the filter honest is the whole point.*
